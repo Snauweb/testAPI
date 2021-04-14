@@ -12,7 +12,7 @@ let dao = new DAO();
 app.use(expressip().getIpInfoMiddleware);
 app.use(cors());
 
-app.get("/", (req, res) => {
+app.get("/ip", (req, res) => {
   fs.readFile('index.html', 'utf-8', (err, data) => {
     if (err) throw err;
     data = data.replace('ipnr', req.headers['x-forwarded-for'] || req.ipInfo.ip).replace('portnr', req.socket.remotePort);
