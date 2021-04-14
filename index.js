@@ -11,6 +11,8 @@ let dao = new DAO();
 
 app.use(expressip().getIpInfoMiddleware);
 app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get("/ip", (req, res) => {
   fs.readFile('index.html', 'utf-8', (err, data) => {
@@ -35,6 +37,13 @@ app.get('/nyheter/:id', (req, res) => {
   dao.getNyhet(req.params.id)
     .then(nyhet => JSON.stringify(nyhet))
     .then(nyhet => res.send(nyhet));
+});
+
+app.post('/nyheter', (req, res) => {
+  params = req.body ? [req.body.overskrift, req.body.tekst, req.body.forfatter] : [req.params.overskrift, req.params.tekst, req.params.forfatter]
+  dao.addNyhet(...params)
+    .then(status => res.send(201))
+    .catch(err => res.sendStatus(400));
 });
 
 app.listen(PORT, '0.0.0.0', () => console.log(`Listening on ${PORT}`));

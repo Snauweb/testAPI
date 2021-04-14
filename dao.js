@@ -50,6 +50,10 @@ class DAO {
     getNyhet(id) {
         return Nyhet.findByPk(id);
     }
+
+    addNyhet(overskrift, tekst, forfatter) {
+        return Nyhet.create({ overskrift: overskrift, tekst: tekst, forfatter: forfatter });
+    }
 }
 
 module.exports = { DAO };
