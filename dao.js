@@ -37,7 +37,7 @@ let Nyhet = sequelize.define('nyhet', {
         allowNull: false
     }
 }, {
-    freezeTableName: true
+    tableName: 'nyheter'
 })
 
 class DAO {
@@ -45,6 +45,10 @@ class DAO {
 
     getNyheter() {
         return Nyhet.findAll();
+    }
+
+    getNyhet(id) {
+        return Nyhet.findByPk(id);
     }
 }
 

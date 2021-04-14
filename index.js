@@ -25,10 +25,16 @@ app.get("/add", (req, res) => {
   res.send("" + (a + b));
 });
 
-app.get('/nyhet', (req, res) => {
+app.get('/nyheter', (req, res) => {
   dao.getNyheter()
     .then(nyheter => JSON.stringify(nyheter))
     .then(nyheter => res.send(nyheter));
+});
+
+app.get('/nyheter/:id', (req, res) => {
+  dao.getNyhet(req.params.id)
+    .then(nyhet => JSON.stringify(nyhet))
+    .then(nyhet => res.send(nyhet));
 });
 
 app.listen(PORT, '0.0.0.0', () => console.log(`Listening on ${PORT}`));
