@@ -11,6 +11,13 @@ instruments = ["fele", "fløyte", "trekkspill",
                "hardingfele", "vaskebrett", "bass",
                "klarinett", "torader", "saxofon"]
 
+laatnames1 = ["Berg", "Knert", "Hus", "Gamal",
+              "Ring", "Stor", "Lys", "Kofte",
+              "Snok", "Låk", "Vår", "Sommer"]
+laatnames2 = ["råsa", "valsen", "lia", "polsen",
+              "osten", "stugu", "hølet", "spranget",
+              "heia", "fjorden", "låven", "bygda"]
+
 testLaat = {
     "id": 10,
     "tittel": "Bergrosa",
@@ -110,9 +117,34 @@ def generateDate(startDate=""):
 
     result = "{:4d}-{:02d}-{:02d}".format(year, month, day)
     return result
-            
+
+def generateLaat():
+    randIndex1 = math.floor(random.random()*len(laatnames1))
+    randIndex2 = math.floor(random.random()*len(laatnames2))
+    return laatnames1[randIndex1] + laatnames2[randIndex2]
+
 def generateLaater(number):
-    return [testLaat, testLaat, testLaat]
+    result=[]
+    for i in range(1, number+1):
+        newName = generateLaat()
+        createdDate = generateDate();
+        lastUpdated = generateDate(createdDate)
+        
+        newLaat = {
+            "id": i,
+            "tittel": newName,
+            "pdfUrl": "/noter/" + newName + ".pdf",
+            "lydUrl": "/opptak/" + newName + ".mp3",
+            "kallenavn": [
+                generateLaat() for i in range(0, math.floor(random.random()*3))
+            ],
+            "createdAt": createdDate,
+            "updatedAt": lastUpdated
+        }
+        result.append(newLaat)
+
+        
+    return result
 
 def generateInnlegg(number):
     return [testInnlegg, testInnlegg, testInnlegg]
@@ -142,7 +174,6 @@ def main():
         file_objects.append(((open(name+".json", "w+")),(name)))
 
     for file in file_objects:
-        print(file[1])
         if file[1] == 'laater':
             file[0].write(json.dumps(generateLaater(50)))
 
