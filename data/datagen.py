@@ -147,7 +147,27 @@ def generateLaater(number):
     return result
 
 def generateInnlegg(number):
-    return [testInnlegg, testInnlegg, testInnlegg]
+    result = []
+    for i in range(1, number+1):
+        createdDate = generateDate();
+        lastUpdated = generateDate(createdDate)
+
+        type = ("nyhet" if (random.random() < 0.5) else "referat")
+        overskrift = " ".join([generateLaat() for i in range(0,7)])
+        tekst = " ".join([generateLaat() for i in range(0,300)])
+        
+        newInnlegg = {
+            "id": i,
+            "overskrift": overskrift,
+            "tekst": tekst,
+            "forfatterId": math.ceil(random.random()*50),
+            "type": type,
+            "createdAt": createdDate,
+            "updatedAt": lastUpdated
+        }
+        result.append(newInnlegg)
+        
+    return result
 
 def generateMedlemmer(number):
     result = []
