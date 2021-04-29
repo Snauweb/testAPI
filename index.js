@@ -7,7 +7,7 @@ let fsPromises = fs.promises;
 let expressip = require('express-ip');
 const showdown = require('showdown');
 let DAO = require('./dao').DAO;
-let { readObjectsFromFile } = require('./utils');
+let { readObjectsFromFileAndParseQuery } = require('./utils');
 const PORT = process.env.PORT || 5000;
 require('dotenv').config();
 
@@ -36,17 +36,17 @@ app.use('/', (req, res, next) => {
 });
 
 app.get('/medlemmer', (req, res) => {
-  return readObjectsFromFile(`${baseDataFolder}medlemmer.json`, res.locals.query)
+  return readObjectsFromFileAndParseQuery(`${baseDataFolder}medlemmer.json`, res.locals.query)
     .then(medlemmer => res.send(medlemmer));
 });
 
 app.get('/innlegg', (req, res) => {
-  return readObjectsFromFile(`${baseDataFolder}innlegg.json`, res.locals.query)
+  return readObjectsFromFileAndParseQuery(`${baseDataFolder}innlegg.json`, res.locals.query)
     .then(innlegg => res.send(innlegg));
 });
 
 app.get('/laater', (req, res) => {
-  return readObjectsFromFile(`${baseDataFolder}laater.json`, res.locals.query)
+  return readObjectsFromFileAndParseQuery(`${baseDataFolder}laater.json`, res.locals.query)
     .then(laater => res.send(laater));
 });
 
