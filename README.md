@@ -20,7 +20,7 @@ Kjør
 npm start
 ```
 Serveren serves på http://localhost:5000
-
+<!--info-->
 ## Bruke API
 Du kan nå gjøre kall til disse endepunktene med 
 ```
