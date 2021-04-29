@@ -72,7 +72,7 @@ Nyhetssaker har feltene
 ```
 Egne søkenøkler for /innlegg
 ```
-type            //referat eller nyhetssak
+type            //referat eller nyhet
 ```
 
 ### /laater
