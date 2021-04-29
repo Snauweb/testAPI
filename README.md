@@ -41,7 +41,7 @@ Mulige nøkler er
 antall          //Antall objekter du får tilbake
 foerDato        //YYYY-MM-DD
 etterDato       //YYYY-MM-DD
-sorterPaa       //felt-retning
+sorter          //felt-retning
 <felt>          //eks. fornavn=Magnus
 ```
 ### /medlemmer
