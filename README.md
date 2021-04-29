@@ -27,7 +27,7 @@ Du kan nå gjøre kall til disse endepunktene med
 http://localhost:5000/<endepunkt>
 ```
 ```
-/medlem
+/medlemmer
 /innlegg
 /laater
 /info
@@ -44,7 +44,7 @@ etterDato       //YYYY-MM-DD
 sorterPaa       //felt-retning
 <felt>          //eks. fornavn=Magnus
 ```
-### /medlem
+### /medlemmer
 Medlem har feltene
 ```
 {
