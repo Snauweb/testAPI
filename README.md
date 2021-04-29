@@ -1,39 +1,93 @@
-# node-js-getting-started
+# Test API for Snaustrindas ekstremt kule nettside
+Server som simulerer et API til en backend for læring av vev-programmering
+Skal være RESTful, hvem vet? https://restfulapi.net/
 
-A barebones Node.js app using [Express 4](http://expressjs.com/).
+## Bygging
 
-This application supports the [Getting Started on Heroku with Node.js](https://devcenter.heroku.com/articles/getting-started-with-nodejs) article - check it out.
-
-## Running Locally
-
-Make sure you have [Node.js](http://nodejs.org/) and the [Heroku CLI](https://cli.heroku.com/) installed.
-
-```sh
-$ git clone https://github.com/heroku/node-js-getting-started.git # or clone your own fork
-$ cd node-js-getting-started
-$ npm install
-$ npm start
-```
-
-Your app should now be running on [localhost:5000](http://localhost:5000/).
-
-## Deploying to Heroku
+Innstaller node og npm
+Klon prosjektet
 
 ```
-$ heroku create
-$ git push heroku main
-$ heroku open
+git clone https://github.com/Snauweb/testAPI.git
+cd testAPI
 ```
-or
+Innstaller avhengigheter
+```
+npm install
+```
+Kjør
+```
+npm start
+```
+Serveren serves på http://localhost:5000
 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+## Bruke API
+Du kan nå gjøre kall til disse endepunktene med 
+```
+http://localhost:5000/<endepunkt>
+```
+```
+/medlem
+/innlegg
+/laater
+/info
+```
+Du kan legge til søkeparametre med
+```
+http://localhost:5000/<endepunkt>?[<nøkkel>=<verdi>]*
+```
+Mulige nøkler er
+```
+antall          //Antall objekter du får tilbake
+foerDato        //YYYY-MM-DD
+etterDato       //YYYY-MM-DD
+sorterPaa       //felt-retning
+<felt>          //eks. fornavn=Magnus
+```
+### /medlem
+Medlem har feltene
+```
+{
+    id: Number,
+    fornavn: String,
+    etternavn: String,
+    instrument: String,
+    createdAt: Date,
+    updatedAt: Date
+}
+```
 
-## Documentation
+### /innlegg
+Nyhetssaker har feltene
+```
+{
+    id: Number,
+    overskrift: String,
+    tekst: String,
+    forfatterId: Number,
+    type: String, 
+    createdAt: Date,
+    updatedAt: Date
+}
+```
+Egne søkenøkler for /innlegg
+```
+type            //referat eller nyhetssak
+```
 
-For more information about using Node.js on Heroku, see these Dev Center articles:
+### /laater
+Låter har feltene 
+```
+{
+    id: Number,
+    tittel: String,
+    pdfUrl: String,
+    lydUrl: String,
+    kallenavn: String[],
+    createdAt: Date,
+    updatedAt: Date
+}
+```
 
-- [Getting Started on Heroku with Node.js](https://devcenter.heroku.com/articles/getting-started-with-nodejs)
-- [Heroku Node.js Support](https://devcenter.heroku.com/articles/nodejs-support)
-- [Node.js on Heroku](https://devcenter.heroku.com/categories/nodejs)
-- [Best Practices for Node.js Development](https://devcenter.heroku.com/articles/node-best-practices)
-- [Using WebSockets on Heroku with Node.js](https://devcenter.heroku.com/articles/node-websockets)
+### /info
+Returnerer informasjonen fra seksjonen Bruke API
