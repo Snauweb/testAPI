@@ -35,6 +35,14 @@ app.use('/', (req, res, next) => {
   next();
 });
 
+app.get('/', (req, res) => {
+  return fsPromises.open('./README.md', 'r')
+    .then(file => file.readFile('utf-8'))
+    .then(str => str.split('<!--info-->'))
+    .then(info => converter.makeHtml(info[1]))
+    .then(info => res.send(info));
+});
+
 app.get('/medlemmer', (req, res) => {
   return readObjectsFromFileAndParseQuery(`${baseDataFolder}medlemmer.json`, res.locals.query)
     .then(medlemmer => res.send(medlemmer));
