@@ -56,6 +56,6 @@ app.get('/info', (req, res) => {
     .then(str => str.split('<!--info-->'))
     .then(info => converter.makeHtml(info[1]))
     .then(info => res.send(info));
-})
+});
 
 app.listen(PORT, '0.0.0.0', () => console.log(`Listening on ${PORT}`));
