@@ -24,9 +24,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/', (req, res, next) => {
   if (req.query.antall) {
     req.query.antall = parseInt(req.query.antall);
-    if (isNaN(req.query.antall)) {
-      res.status(400);
-      res.send('Antall må være et heltall');
+      if (isNaN(req.query.antall)) {
+	  res.status(400);
+	  res.send('Antall må være et heltall');
       return;
     }
   }

@@ -25,15 +25,27 @@ const readObjectsFromFileAndParseQuery = (file, options) => {
             //TODO sort ascending or descending dependent on preference
             if (options.sorter) {
                 const [key, order] = options.sorter.split('-');
-                key = key ? key : 'id';
-                return objects.sort((a, b) => {
-                    return ((String)(a[key])).localeCompare((String)(b[key]));
-                });
+		let ascending = 1;
+		if(desc.includes(order))
+		    ascending = -1;
+
+		let compare = (a, b) => {
+		    return ascending * ((String)(a[key])).localeCompare((String)(b[key]));
+		};
+		
+		if(key === "id") {
+		    console.log("sorting on id");
+		    compare = (a, b) => {
+			let cmpValue = ascending * (a.id - b.id)
+			return cmpValue
+		    }
+		}
+                return objects.sort(compare);
             }
             return objects;
         })
         //Get only as many objects as requested
-        .then(objects => objects.slice(0, options.antall ? options.antall : objects.length));
+        .then(objects => objects.slice(0, options.antall ? options.antall : objects.length)).catch((e)=>(console.log(e)));
 }
 
 module.exports = { readObjectsFromFileAndParseQuery };
