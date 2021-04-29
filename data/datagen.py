@@ -1,4 +1,6 @@
-outputs = ['laater', 'innlegg', 'medlemer']
+import json
+
+outputs = ['laater', 'innlegg', 'medlemmer']
 testLaat = {
     "id": 10,
     "tittel": "Bergrosa",
@@ -31,9 +33,33 @@ testMedlem = {
     "updatedAt": "2001-11-23"
 }
 
-def main():
-    print(testLaat)
-    print(testInnlegg)
-    print(testMedlem)
+def generateLaater():
+    return [testLaat, testLaat, testLaat]
 
+def generateInnlegg():
+    return [testInnlegg, testInnlegg, testInnlegg]
+
+def generateMedlemmer():
+    return [testMedlem, testMedlem, testMedlem]
+
+
+def main():
+    file_objects=[]
+    for name in outputs:
+        file_objects.append(((open(name+".json", "w+")),(name)))
+
+    for file in file_objects:
+        print(file[1])
+        if file[1] == 'laater':
+            file[0].write(json.dumps(generateLaater()))
+
+        elif file[1] == 'innlegg':
+            file[0].write(json.dumps(generateInnlegg()))
+
+        elif file[1] == 'medlemmer':
+                file[0].write(json.dumps(generateInnlegg()))
+        else:
+            print("unreconised data object type " + file[1])
+        
+        file[0].close()
 main()
